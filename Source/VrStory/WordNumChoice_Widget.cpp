@@ -17,29 +17,33 @@ void UWordNumChoice_Widget::NativeConstruct()
 
 void UWordNumChoice_Widget::Create_TwoWords()
 {
-	UE_LOG(LogTemp, Warning, TEXT("two word click success!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
+	UE_LOG(LogTemp, Warning, TEXT("two word click success"));
 	AMyGameModeBase* GameMode=Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if (GameMode)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Gamemode loading success@@@@@@@@@@@"));
-		GameMode->SetWordNum(2); //2´Ü¾î·Î ÀÌ·ç¾îÁø HUD¶ç¿öÁÜ
+		UE_LOG(LogTemp, Warning, TEXT("Gamemode loading success"));
+		GameMode->SetWordNum(2); //2ë‹¨ì–´ë¡œ ì´ë£¨ì–´ì§„ HUDë„ì›Œì¤Œ
 	}
 }
 
 void UWordNumChoice_Widget::Create_ThreeWords()
 {
+	UE_LOG(LogTemp, Warning, TEXT("three word click success"));
 	AMyGameModeBase* GameMode = Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if (GameMode)
 	{
-		//GameMode->SetWordNum(3); //3´Ü¾î·Î ÀÌ·ç¾îÁø HUD¶ç¿öÁÜ
+		UE_LOG(LogTemp, Warning, TEXT("Gamemode loading success"));
+		GameMode->SetWordNum(3); //3ë‹¨ì–´ë¡œ ì´ë£¨ì–´ì§„ HUDë„ì›Œì¤Œ
 	}
 }
 
 void UWordNumChoice_Widget::Create_FourWords()
 {
+	UE_LOG(LogTemp, Warning, TEXT("four word click success"));
 	AMyGameModeBase* GameMode = Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if (GameMode)
 	{
-		//GameMode->SetWordNum(4); //4´Ü¾î·Î ÀÌ·ç¾îÁø HUD¶ç¿öÁÜ
+		UE_LOG(LogTemp, Warning, TEXT("Gamemode loading success"));
+		GameMode->SetWordNum(4); //4ë‹¨ì–´ë¡œ ì´ë£¨ì–´ì§„ HUDë„ì›Œì¤Œ
 	}
 }

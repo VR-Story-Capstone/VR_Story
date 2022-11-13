@@ -17,21 +17,24 @@ class VRSTORY_API AMyGameModeBase : public AGameModeBase
 	public:
 		AMyGameModeBase();
 	private:
-		int word_num = 0; //¼±ÅÃµÈ ¹®ÀåÇü½ÄÀÇ ´Ü¾î °¹¼ö. 0Àº ¾Æ¹«°Íµµ ¾Æ´Ñ»óÅÂ
+		int word_num = 0; //ì„ íƒëœ ë¬¸ì¥í˜•ì‹ì˜ ë‹¨ì–´ ê°¯ìˆ˜. 0ì€ ì•„ë¬´ê²ƒë„ ì•„ë‹Œìƒíƒœ
 	public:
-		int SetWordNum(int n); //¼±ÅÃµÈ ´Ü¾î°¹¼ö¸¦ ÀúÀåÇÏ°í, ÇØ´çÇÏ´Â HUD¸¦ È­¸é¿¡ ¶ç¿öÁÜ.
+		int SetWordNum(int n); //ì„ íƒëœ ë‹¨ì–´ê°¯ìˆ˜ë¥¼ ì €ì¥í•˜ê³ , í•´ë‹¹í•˜ëŠ” HUDë¥¼ í™”ë©´ì— ë„ì›Œì¤Œ.(í°ì„ êµì²´í•˜ëŠ” ë°©ì‹ìœ¼ë¡œ ì´ë£¨ì–´ì§) 
 		int GetWordNum(); 
-		void RemoveHud(); //HUD¸¦ Áö¿öÁÜ°ú µ¿½Ã¿¡ ÇÊ¿äÇÑ ÃÊ±âÈ­¸¦ ÁøÇà.
+		void RemoveHud(); //HUDë¥¼ ì§€ì›Œì¤Œê³¼ ë™ì‹œì— í•„ìš”í•œ ì´ˆê¸°í™”ë¥¼ ì§„í–‰.
 
-		UPROPERTY()
+		/*UPROPERTY()
 		TSubclassOf<UUserWidget> HUD_Class2;
 
 		UPROPERTY()
 		TSubclassOf<UUserWidget> HUD_Class3;
 
 		UPROPERTY()
-		TSubclassOf<UUserWidget> HUD_Class4;
+		TSubclassOf<UUserWidget> HUD_Class4;*/
 
+		UPROPERTY()
+		TSubclassOf<APawn> Main_Pawn_Class;
+	
 		UPROPERTY()
 		TSubclassOf<APawn> Hud2_Pawn_Class;
 
@@ -42,5 +45,8 @@ class VRSTORY_API AMyGameModeBase : public AGameModeBase
 		TSubclassOf<APawn> Hud4_Pawn_Class;
 
 		UPROPERTY()
-		UUserWidget* CurrentHud;
+		APawn* Current_Pawn_Class; //í•­ìƒ ì§€ê¸ˆ ë¹™ì˜í•˜ê³ ìˆëŠ” í°ì„ reference í•˜ê³ ìˆìŒ (destroyë“± í•˜ë ¤ë©´ UGameplayStatics::GetAllActorsOfClassì‚¬ìš©)
+
+		UPROPERTY()
+		APlayerController* controller;
 };
