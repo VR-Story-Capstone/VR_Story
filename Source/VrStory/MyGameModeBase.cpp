@@ -2,9 +2,6 @@
 
 
 #include "MyGameModeBase.h"
-#include "USentence_Hud2.h"
-#include "USentence_Hud3.h"
-#include "USentence_Hud4.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 
@@ -12,23 +9,13 @@ AMyGameModeBase::AMyGameModeBase()
 	:Super()
 {
 	word_num = 0;
-	/*static ConstructorHelpers::FClassFinder<UUSentence_Hud2> UI_HUD_2(TEXT("WidgetBlueprint'/Game/Widget/2WordsSentence_HUD.2WordsSentence_HUD_C'"));
-	if (UI_HUD_2.Succeeded())
-	{
-		HUD_Class2 = UI_HUD_2.Class;
-	}
 
-	static ConstructorHelpers::FClassFinder<UUSentence_Hud3> UI_HUD_3(TEXT("WidgetBlueprint'/Game/Widget/3WordsSentence_HUD.3WordsSentence_HUD_C'"));
-	if (UI_HUD_3.Succeeded())
-	{
-		HUD_Class3 = UI_HUD_3.Class;
-	}
 
-	static ConstructorHelpers::FClassFinder<UUSentence_Hud4> UI_HUD_4(TEXT("WidgetBlueprint'/Game/Widget/4WordsSentence_HUD.4WordsSentence_HUD_C'"));
-	if (UI_HUD_4.Succeeded())
+	static ConstructorHelpers::FClassFinder<APawn> Main_Pawn(TEXT("Blueprint'/Game/VRTemplate/Blueprints/VRPawn_ForMenu.VRPawn_ForMenu_C'"));
+	if (Main_Pawn.Succeeded())
 	{
-		HUD_Class4 = UI_HUD_4.Class;
-	}*/
+		Main_Pawn_Class = Main_Pawn.Class;
+	}
 	
 	static ConstructorHelpers::FClassFinder<APawn> Hud2_Pawn(TEXT("Blueprint'/Game/VRTemplate/Blueprints/VRPawn_For_Two.VRPawn_For_Two_C'"));
 	if (Hud2_Pawn.Succeeded())
@@ -46,6 +33,12 @@ AMyGameModeBase::AMyGameModeBase()
 	if (Hud4_Pawn.Succeeded())
 	{
 		Hud4_Pawn_Class = Hud4_Pawn.Class;
+	}
+
+	static ConstructorHelpers::FClassFinder<AActor> MenuT(TEXT("Blueprint'/Game/VRTemplate/Blueprints/Menu.Menu_C'"));
+	if (MenuT.Succeeded())
+	{
+		Menu = MenuT.Class;
 	}
 }
 
@@ -146,13 +139,107 @@ int AMyGameModeBase::GetWordNum()
 	return word_num;
 }
 
-void AMyGameModeBase::RemoveHud()
+FString AMyGameModeBase::SetMapName(FString str)
 {
-	/*HUD_Class2 = NULL; HUD_Class3 = NULL; HUD_Class4 = NULL;
-	if (CurrentHud)
-	{
-		CurrentHud->RemoveFromViewport();
-		CurrentHud = NULL;
-	}
-	SetWordNum(0);*/
+	MapName=str;
+	UE_LOG(LogTemp, Warning, TEXT("현재 맵이름: %s"),*MapName);
+	return MapName;
 }
+
+FString AMyGameModeBase::GetMapName()
+{
+	return MapName;
+}
+
+FString AMyGameModeBase::SetSubject(FString str)
+{
+	Subject=str;
+	UE_LOG(LogTemp, Warning, TEXT("현재 주어는: %s"),*Subject);
+	return Subject;
+}
+
+FString AMyGameModeBase::GetSubject()
+{
+	return Subject;
+}
+
+FString AMyGameModeBase::SetVerb(FString str)
+{
+	Verb=str;
+	UE_LOG(LogTemp, Warning, TEXT("현재 동사는: %s"),*Verb);
+	return Verb;
+}
+
+FString AMyGameModeBase::GetVerb()
+{
+	return Verb;
+}
+
+FString AMyGameModeBase::SetObject(FString str)
+{
+	Object=str;
+	UE_LOG(LogTemp, Warning, TEXT("현재 목적어는: %s"),*Object);
+	return Object;
+}
+
+FString AMyGameModeBase::GetObject()
+{
+	return Object;
+}
+
+FString AMyGameModeBase::SetComplement1(FString str)
+{
+	Complement1=str;
+	UE_LOG(LogTemp, Warning, TEXT("현재 보어1은: %s"),*Complement1);
+	return Complement1;
+}
+
+FString AMyGameModeBase::GetComplement1()
+{
+	return Complement1;
+}
+
+FString AMyGameModeBase::SetComplement2(FString str)
+{
+	Complement2=str;
+	UE_LOG(LogTemp, Warning, TEXT("현재 보어2는: %s"),*Complement2);
+	return Complement2;
+}
+
+FString AMyGameModeBase::GetComplement2()
+{
+	return Complement2;
+}
+
+void AMyGameModeBase::ChangePlayerPawnToMenu()
+{
+	FVector SpawnVector;
+	FRotator SpawnRotator;
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPlayerViewPoint(SpawnVector,SpawnRotator); //현재 플레이어의 위치,회전값 얻기
+	AActor* OldActor=controller->GetPawn();
+	controller->UnPossess();//현재 빙의중인 폰 해제
+	const FActorSpawnParameters SpawnInfo;
+	APawn * NewPawn= GetWorld()->SpawnActor<APawn>(Main_Pawn_Class,SpawnVector,SpawnRotator,SpawnInfo); //  새 pawn 스폰(현재 플레이어 위치에)
+	controller->Possess(NewPawn); //HUD가 있는 폰으로 변경
+		
+	if(controller->GetPawn()) //폰을 성공적으로 변경했다면
+		{
+			UE_LOG(LogTemp, Warning, TEXT("------------------새 문장만들기를 위한 폰 변경 OK-------------------"));
+			if(GetWorld()->DestroyActor(OldActor))//변경 전 폰을 게임에서 없앰
+			{
+			UE_LOG(LogTemp, Warning, TEXT("------------------Destroy Access OK-------------------"));
+			Current_Pawn_Class=UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+			}
+			AActor* MenuUI_Actor=UGameplayStatics::GetActorOfClass(GetWorld(),Menu);
+			MenuUI_Actor->Destroy();
+		}
+	else //폰 변경 실패
+		{
+		UE_LOG(LogTemp, Warning, TEXT("------------------Changing Pawn EROOR-------------------"));
+		}
+}
+
+
+
+
+

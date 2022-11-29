@@ -13,7 +13,7 @@ UCLASS()
 class VRSTORY_API UWordNumChoice_Widget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 public:
 	virtual void NativeConstruct() override;
 
