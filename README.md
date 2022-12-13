@@ -5,3 +5,5 @@
 - Content폴더의 용량이 너무커서 Content/Widget폴더를 제외한 나머지는 .gitignore에 등록되어 있어서 push해도 안올라갑니다! 
   즉, Content폴더는 변경사항이 생기면(애니메이션 추가, 에셋 추가 등) 드라이브나 usb를 통해서 팀원끼리 동기화가 필요합니다!
   그러기 위해선 추가 및 변경된 폴더를 잘 기억하고 있어야합니다
+
+-에셋,애니메이션,소리 등을 총 포함한 파일은: https://1drv.ms/u/s!At_nyOK45TvPiGT28BI-5zVY_gXA?e=irDcv0 에서 다운가능합니다.
