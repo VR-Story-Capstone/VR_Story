@@ -32,7 +32,7 @@ void USelectWidget_4_2_Human_C::Create_Select_4_2_toman()
 	AMyGameModeBase* GameMode=Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if(GameMode)
 	{
-		GameMode->SetComplement1("man");
+		GameMode->SetComplement1("toman");
 	}
 	//보어1 설정
 }
@@ -52,7 +52,7 @@ void USelectWidget_4_2_Human_C::Create_Select_4_2_towoman()
 	AMyGameModeBase* GameMode=Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if(GameMode)
 	{
-		GameMode->SetComplement1("woman");
+		GameMode->SetComplement1("towoman");
 	}
 	//보어1 설정
 }
@@ -72,7 +72,7 @@ void USelectWidget_4_2_Human_C::Create_Select_4_2_withman()
 	AMyGameModeBase* GameMode=Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if(GameMode)
 	{
-		GameMode->SetComplement1("man");
+		GameMode->SetComplement1("withman");
 	}
 	//보어1 설정
 }
@@ -92,7 +92,7 @@ void USelectWidget_4_2_Human_C::Create_Select_4_2_withwoman()
 	AMyGameModeBase* GameMode=Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 	if(GameMode)
 	{
-		GameMode->SetComplement1("woman");
+		GameMode->SetComplement1("withwoman");
 	}
 	//보어1 설정
 }

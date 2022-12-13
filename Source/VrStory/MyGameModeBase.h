@@ -21,7 +21,7 @@ class VRSTORY_API AMyGameModeBase : public AGameModeBase
 		int word_num = 0; //선택된 문장형식의 단어 갯수. 0은 아무것도 아닌상태
 	
 		UPROPERTY(BlueprintReadWrite)
-		FString MapName;
+		FString MapName; //Land, Mountain, City, House
 
 		UPROPERTY(BlueprintReadWrite)
 		FString Subject; //주어(빨강)
@@ -61,7 +61,6 @@ class VRSTORY_API AMyGameModeBase : public AGameModeBase
 
 		//UFUNCTION(BlueprintCallable,Category="ChangePlayerPawnToMenu") //카테고리 안적어주면 블루프린트에서 call 못함
 		//void DestroyMenu(); //왼쪽 컨트롤러 메뉴에서 사용되는 플레이어폰 변경용
-
 	
 		UPROPERTY()
 		TSubclassOf<APawn> Main_Pawn_Class;
@@ -83,6 +82,7 @@ class VRSTORY_API AMyGameModeBase : public AGameModeBase
 	
 		UPROPERTY()
 		APlayerController* controller;
-
+	
+	
 		
 };

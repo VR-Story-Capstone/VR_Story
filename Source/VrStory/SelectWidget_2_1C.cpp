@@ -60,9 +60,10 @@ void USelectWidget_2_1C::Create_Select_2_2_crocodile()
 	TSubclassOf<AActor> NewUIClass=ManagerObject->UI_Class2_2_animal;
 	AActor* OriginalUI_Actor=UGameplayStatics::GetActorOfClass(GetWorld(),OriginalUIClass);
 	FTransform SpawnTransform=OriginalUI_Actor->GetActorTransform();
+	OriginalUI_Actor->Destroy();
 	AActor* UIActor=GetWorld()->SpawnActor<AActor>(NewUIClass,SpawnTransform);
 	UIActor->SetActorScale3D((FVector(0.1f)));
-	OriginalUI_Actor->Destroy();
+	
 	/**********************다음 UI 생성**********************/
 
 	AMyGameModeBase* GameMode=Cast<AMyGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
