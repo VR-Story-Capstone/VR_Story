@@ -30,7 +30,8 @@ void USelectWidget_2_2_Human_C::Spawn_human_jump()
 		GameMode->SetVerb("jump");
 	}
 	//동사 설정
-	
+
+	//GameMode->ManSpawn();
 	//'(남자/여자)가 점프한다' 생성 
 }
 

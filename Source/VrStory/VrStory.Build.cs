@@ -8,10 +8,10 @@ public class VrStory : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","UMG" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","UMG", "NavigationSystem","AIModule","GameplayTasks","HTTP", "JSON" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
-
+		bEnableUndefinedIdentifierWarnings = false;
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		
